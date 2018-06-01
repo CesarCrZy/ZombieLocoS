@@ -22,6 +22,8 @@ app.get('/armas', (request, response) => response.render('armas'));
 
 app.get('/victimas', (request, response) => response.render('victimas'));
 
+app.get('/new-entry', (request, response) => response.render('new-entry'));
+
 app.post('/victimas', (request, response) => {
     if (!request.body.title || !request.body.body) {
         response.status(400).send("Las entradas deben de tener un titulo y un mensaje");
