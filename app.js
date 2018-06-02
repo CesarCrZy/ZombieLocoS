@@ -1,11 +1,10 @@
 var http = require('http');
 var path = require('path');
 var express = require('express');
-var bodiParser = require('body-parser');
 var logger = require('morgan');
+var bodiParser = require('body-parser');
 
 var app = express();
-
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
 var entries = [];
@@ -17,16 +16,14 @@ app.use(bodiParser.urlencoded({ extended: false }));
 app.get('/', (request, response) => response.render('index'));
 
 app.get('/clases', (request, response) => response.render('clases'));
-
-app.get('/armas', (request, response) => response.render('armas'));
-
 app.get('/victimas', (request, response) => response.render('victimas'));
-
+app.get('/armas', (request, response) => response.render('armas'));
 app.get('/new-entry', (request, response) => response.render('new-entry'));
+
 
 app.post('/victimas', (request, response) => {
     if (!request.body.title || !request.body.body) {
-        response.status(400).send("Las entradas deben de tener un titulo y un mensaje");
+        response.status(400).send('Las entradas deben tener un nombre y el zombie');
         return;
     }
     entries.push({
@@ -36,11 +33,6 @@ app.post('/victimas', (request, response) => {
     });
     response.redirect('/');
 });
-
-
-
-
 app.use((request, response) => response.status(404).render('404'));
 http.createServer(app).listen(3000, () =>
-    console.log("La aplicacion esta corriendo en el puerto 3000")
-);
+    console.log('La aplicacion esta corriendo en el puerto 3000'));
